@@ -1,5 +1,5 @@
 import sbt.Project.projectToRef
-import play.PlayImport.PlayKeys._
+import play.sbt.PlayImport.PlayKeys._
 
 lazy val clients = Seq(exampleClient)
 lazy val scalaV = "2.11.7"
@@ -25,8 +25,7 @@ lazy val exampleServer = (project in file("example-server")).settings(
     "org.webjars" %% "webjars-play" % "2.4.0",
     "org.webjars" % "bootstrap" % "3.3.5",
     "org.webjars" % "jquery" % "2.1.4",
-    "org.webjars" % "font-awesome" % "4.4.0",
-    "net.sourceforge.htmlunit" % "htmlunit" % "2.18" % "test"
+    "org.webjars" % "font-awesome" % "4.4.0"
   )
  ).enablePlugins(PlayScala).
   aggregate(clients.map(projectToRef): _*).
