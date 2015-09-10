@@ -16,6 +16,7 @@ lazy val exampleServer = (project in file("example-server")).settings(
     filters,
     jdbc,
     evolutions,
+    specs2 % Test,
     "com.typesafe.play" %% "anorm" % "2.5.0",
     "com.vmunier" %% "play-scalajs-scripts" % "0.3.0",
     "com.typesafe.slick" %% "slick" % "3.0.2",
@@ -24,7 +25,8 @@ lazy val exampleServer = (project in file("example-server")).settings(
     "org.webjars" %% "webjars-play" % "2.4.0",
     "org.webjars" % "bootstrap" % "3.3.5",
     "org.webjars" % "jquery" % "2.1.4",
-    "org.webjars" % "font-awesome" % "4.4.0"
+    "org.webjars" % "font-awesome" % "4.4.0",
+    "net.sourceforge.htmlunit" % "htmlunit" % "2.18" % "test"
   )
  ).enablePlugins(PlayScala).
   aggregate(clients.map(projectToRef): _*).
@@ -52,6 +54,8 @@ lazy val exampleShared = (crossProject.crossType(CrossType.Pure) in file("exampl
 
 lazy val exampleSharedJvm = exampleShared.jvm
 lazy val exampleSharedJs = exampleShared.js
+
+resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 
 // loads the jvm project at sbt startup
 onLoad in Global := (Command.process("project exampleServer", _: State)) compose (onLoad in Global).value
