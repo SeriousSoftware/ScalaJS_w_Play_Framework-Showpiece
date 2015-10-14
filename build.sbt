@@ -1,5 +1,5 @@
 import sbt.Project.projectToRef
-import play.PlayImport.PlayKeys._
+import play.sbt.PlayImport.PlayKeys._
 
 lazy val clients = Seq(exampleClient)
 lazy val scalaV = "2.11.7"
@@ -16,6 +16,7 @@ lazy val exampleServer = (project in file("example-server")).settings(
     filters,
     jdbc,
     evolutions,
+    specs2 % Test,
     "com.typesafe.play" %% "anorm" % "2.5.0",
     "com.vmunier" %% "play-scalajs-scripts" % "0.3.0",
     "com.typesafe.slick" %% "slick" % "3.0.2",
@@ -52,6 +53,8 @@ lazy val exampleShared = (crossProject.crossType(CrossType.Pure) in file("exampl
 
 lazy val exampleSharedJvm = exampleShared.jvm
 lazy val exampleSharedJs = exampleShared.js
+
+resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 
 // loads the jvm project at sbt startup
 onLoad in Global := (Command.process("project exampleServer", _: State)) compose (onLoad in Global).value
