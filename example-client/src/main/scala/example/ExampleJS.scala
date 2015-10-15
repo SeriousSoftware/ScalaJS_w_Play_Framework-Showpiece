@@ -1,8 +1,9 @@
 package example
 
-import scala.scalajs.js
-import js.Dynamic.{ global => g }
 import shared.SharedMessages
+
+import scala.scalajs.js
+import scala.scalajs.js.Dynamic.{global => g}
 
 object ExampleJS extends js.JSApp {
   def main(): Unit = {

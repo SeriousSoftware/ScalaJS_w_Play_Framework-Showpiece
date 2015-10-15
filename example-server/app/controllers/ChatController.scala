@@ -1,15 +1,22 @@
 package controllers
 
-import models.{User, ChatRoom}
-import play.api.data._
+import models.ChatRoom
 import play.api.data.Forms._
+import play.api.data._
 import play.api.libs.EventSource
-import play.api.libs.iteratee.{Enumeratee, Concurrent}
-import play.api.libs.json.JsValue
-import play.api.mvc.{WebSocket, Action, Controller}
 import play.api.libs.concurrent.Execution.Implicits._
+import play.api.libs.iteratee.{Concurrent, Enumeratee}
+import play.api.libs.json.JsValue
+import play.api.mvc.{Action, Controller, WebSocket}
 
 object ChatController extends Controller {
+
+  val talkForm = Form(
+    tuple(
+      "username" -> nonEmptyText,
+      "msg" -> text
+    )
+  )
 
   def index = Action { implicit request =>
     Ok(views.html.chat())
@@ -26,24 +33,17 @@ object ChatController extends Controller {
   }
 
   def chatSSE(username: String) = Action.async { request =>
-    ChatRoom.join(username).map{ io =>
+    ChatRoom.join(username).map { io =>
       Ok.feed(io._2
         &> Concurrent.buffer(50)
-        &> Enumeratee.onIterateeDone{ () =>
-          play.Logger.info(request.remoteAddress + " - SSE disconnected")
-        }
+        &> Enumeratee.onIterateeDone { () =>
+        play.Logger.info(request.remoteAddress + " - SSE disconnected")
+      }
         &> EventSource()).as("text/event-stream")
-    }.recover{ case e => BadRequest(e)}
+    }.recover { case e => BadRequest(e) }
   }
 
-  val talkForm = Form(
-    tuple(
-      "username" -> nonEmptyText,
-      "msg" -> text
-    )
-  )
-
-  def talk = Action{ implicit request =>
+  def talk = Action { implicit request =>
     talkForm.bindFromRequest.fold(
       error => BadRequest,
       value => {

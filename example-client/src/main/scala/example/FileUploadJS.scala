@@ -2,13 +2,12 @@ package example
 
 import org.scalajs.dom
 import org.scalajs.dom.raw.FileReader
+import org.scalajs.jquery.{jQuery => $}
+
 import scala.scalajs.js
+import scala.scalajs.js.Dynamic.{global => g}
 import scala.scalajs.js.annotation.JSExport
-import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
-import js.Dynamic.{global => g, _}
-import scalatags.JsDom._
-import all._
-import org.scalajs.jquery.{jQuery=>$,_}
+import scalatags.JsDom.all._
 
 @JSExport
 object FileUploadJS {
@@ -49,10 +48,13 @@ object FileUploadJS {
     div(id:="messages", `class`:="alert alert-info")
   )
 
+  @js.native
   trait EventTargetExt extends dom.EventTarget {
     var files: dom.FileList = js.native
 
   }
+
+  @js.native
   trait EventExt extends dom.Event {
     var dataTransfer: dom.DataTransfer = js.native
 

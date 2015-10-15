@@ -1,16 +1,15 @@
 package shared
 
-
 case class Hangman(
-  level: Int = 0,
-  word: String = "",
-  guess: List[Char] = Nil,
-  misses: Int = 0
-){
+                    level: Int = 0,
+                    word: String = "",
+                    guess: List[Char] = Nil,
+                    misses: Int = 0
+                    ) {
 
   def guessWord() = {
-    for(c <- word.toCharArray) yield {
-      if(guess.contains(c)) c
+    for (c <- word.toCharArray) yield {
+      if (guess.contains(c)) c
       else '_'
     }
   }
@@ -20,9 +19,9 @@ case class Hangman(
   }
 
   def won() = {
-    (for(c <- word.toCharArray) yield {
+    (for (c <- word.toCharArray) yield {
       guess.contains(c)
-    }).find(i=>i==false) == None
+    }).find(i => !i ) == None
   }
 }
 

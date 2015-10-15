@@ -136,11 +136,11 @@ object TaskSlickStore extends TaskStore {
 }
 
 object TaskAnormStore extends TaskStore{
-  import anorm._
-  import anorm.SqlParser._
+  import anorm.{~, SQL}
+  import anorm.SqlParser.{bool,long,str}
   import play.api.db.DB
 
-  override def all(): Future[Seq[Task]] = Future{
+  override def all: Future[Seq[Task]] = Future{
     DB.withConnection { implicit c =>
       SQL("SELECT * FROM Tasks ORDER BY id DESC").as(long("id").? ~ str("txt") ~ bool("done") *).map{
         case id ~ txt ~ done => Task(id, txt, done)

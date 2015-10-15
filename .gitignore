@@ -7,8 +7,6 @@ tmp
 dist
 .idea
 *.iml
-*.ipr
-*.iws
 /out
 .idea_modules
 .classpath

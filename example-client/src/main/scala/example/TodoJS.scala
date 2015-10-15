@@ -4,26 +4,23 @@ import common.Framework
 import config.Routes
 import org.scalajs.dom
 import org.scalajs.dom.ext.{Ajax, AjaxException}
-import scalatags.JsDom._
-import all._
-import tags2.section
 import rx._
-import scala.scalajs.js.annotation.JSExport
 import shared._
-import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
-import scala.concurrent.Future
 
+import scala.concurrent.Future
+import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
+import scala.scalajs.js.annotation.JSExport
+import scalatags.JsDom.all._
+import scalatags.JsDom.tags2.section
 
 @JSExport
 object TodoJS {
   import Framework._
 
   object Model {
-    import scala.scalajs.js
-    import js.Dynamic.{global => g}
-    import org.scalajs.jquery.{jQuery=>$}
-    import upickle.default._
     import common.ExtAjax._
+    import org.scalajs.jquery.{jQuery => $}
+    import upickle.default._
 
     val tasks = Var(List.empty[Task])
 
@@ -126,7 +123,7 @@ object TodoJS {
     footer(id:="info")(
       p("Double-click to edit a todo"),
       p("Original version created by ", a(href:="https://github.com/lihaoyi/workbench-example-app/blob/todomvc/src/main/scala/example/ScalaJSExample.scala")("Li Haoyi")),
-      p("Modified version with database backend can be found ", a(href:="https://github.com/hussachai/play-scalajs-showcase")("here"))
+      p("Modified version with database backend can be found ", a(href:="https://github.com/SeriousSoftware/ScalaJS_w_Play_Framework-Showpiece")("here"))
     )
   }
 

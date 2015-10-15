@@ -1,8 +1,9 @@
 package controllers
 
-import play.api.http.{Writeable, ContentTypes, ContentTypeOf}
+import play.api.http.{ContentTypeOf, ContentTypes, Writeable}
 import play.api.libs.json.JsError
-import play.api.mvc.{Request, Codec}
+import play.api.mvc.{Codec, Request}
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object `package` {
