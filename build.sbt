@@ -6,37 +6,33 @@ lazy val exampleServer = (project in file("example-server")).settings(
     evolutions,
     filters,
     jdbc,
+    specs2 % Test,
     "com.lihaoyi" %% "upickle" % "0.3.6",
     "com.typesafe.play" %% "anorm" % "2.5.0",
-//    "com.typesafe.play" %% "play-slick" % "1.1.0",
     "com.typesafe.slick" %% "slick" % "3.1.0",
     "com.vmunier" %% "play-scalajs-scripts" % "0.3.0",
-    "org.webjars" % "bootstrap" % "3.3.5",
-//    "org.webjars" % "font-awesome" % "4.4.0",
-//    "org.webjars" % "jquery" % "2.1.4",
-    "com.typesafe.play" %% "play-test" % "2.4.3" % "test",
-    "junit" % "junit" % "4.12" % "test",
-    "org.specs2" %% "specs2-core" % "3.6.4" % "test",
-    "org.specs2" %% "specs2-junit" % "3.6.4" % "test" /* ,
-   "org.specs2" %% "specs2" % "3.3.1" % "test",
-    "org.webjars" %% "webjars-play" % "2.4.0" */ ),
+    "org.webjars" % "bootstrap" % "3.3.5" //,
+//  "org.webjars" % "font-awesome" % "4.4.0",
+//  "org.webjars" % "jquery" % "2.1.4",
+//  "org.webjars" %% "webjars-play" % "2.4.0"
+  ),
   pipelineStages := Seq(scalaJSProd, gzip),
   routesImport += "config.Routes._",
   scalaJSProjects := clients,
   scalacOptions in Test ++= Seq("-Yrangepos"),
   scalaVersion := scalaV
- ).enablePlugins(PlayScala).
+).enablePlugins(PlayScala).
   aggregate(clients.map(sbt.Project.projectToRef): _*).
   dependsOn(exampleSharedJvm)
 
 lazy val exampleClient = (project in file("example-client")).settings(
   jsDependencies += RuntimeDOM % "test",
   libraryDependencies ++= Seq(
-    "be.doeraene"  %%% "scalajs-jquery" % "0.8.1",
-    "com.lihaoyi"  %%% "scalarx" % "0.2.8",
-    "com.lihaoyi"  %%% "scalatags" % "0.5.2",
-    "com.lihaoyi"  %%% "upickle" % "0.3.6",
-    "com.lihaoyi"  %%% "utest" % "0.3.1",
+    "be.doeraene" %%% "scalajs-jquery" % "0.8.1",
+    "com.lihaoyi" %%% "scalarx" % "0.2.8",
+    "com.lihaoyi" %%% "scalatags" % "0.5.2",
+    "com.lihaoyi" %%% "upickle" % "0.3.6",
+    "com.lihaoyi" %%% "utest" % "0.3.1",
     "org.scala-js" %%% "scalajs-dom" % "0.8.2"),
   persistLauncher := true,
   persistLauncher in Test := false,

@@ -22,7 +22,7 @@ POST          /hangman/giveup              controllers.HangmanController.giveup
 GET           /upload                      controllers.FileUploadController.index
 POST          /upload                      controllers.FileUploadController.uploadFile
 
-GET           /interop                     controllers.InteropController.index
+#GET           /interop                     controllers.InteropController.index
 
 GET           /chat                        controllers.ChatController.index
 GET           /chat/ws/:username           controllers.ChatController.chatWS(username: String)
