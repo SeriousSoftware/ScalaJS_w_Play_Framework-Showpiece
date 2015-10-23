@@ -19,7 +19,7 @@ lazy val exampleServer = (project in file("example-server")).settings(
   pipelineStages := Seq(scalaJSProd, gzip),
   routesImport += "config.Routes._",
   scalaJSProjects := clients,
-  scalacOptions in Test ++= Seq("-Yrangepos"),
+  scalacOptions in Test ++= Seq("-Yrangepos", "-feature"),
   scalaVersion := scalaV
 ).enablePlugins(PlayScala).
   aggregate(clients.map(sbt.Project.projectToRef): _*).

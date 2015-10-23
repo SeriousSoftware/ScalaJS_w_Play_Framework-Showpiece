@@ -4,10 +4,14 @@
 This project was inspired by [Todo application](http://lihaoyi.github.io/workbench-example-app/todo.html)
 
 This project contains 4 simple examples:
-- Todo application with backend persistence. (InMemory, Slick, Anorm)
-- Hangman (Inspired by [Yii's demo](http://www.yiiframework.com/demos/hangman/))
-- HTML5 Fileupload (Modified from [How to Use HTML5 File Drag and Drop](http://www.sitepoint.com/html5-file-drag-and-drop/))
-- Server Push Chat. It supports both Websocket and Server-Sent Event
+
+1. Todo application with backend persistence. (InMemory, Slick, Anorm)
+1. Hangman (Inspired by [Yii's demo](http://www.yiiframework.com/demos/hangman/))
+  This simple game as a Single Page Application shows you the use of client side change propagation by means of [Scala.Rx](https://github.com/lihaoyi/scala.rx). A general Scala library which also runs on a JS platform (due its Execution Context abstraction).
+  _Smart variables_ are embedded in a page `HTMLElement` producing function (`pageGuess`) will auto-update themselves when the values they depend on change and are placed in a `Rx` block.
+  With compile-time pickling aka serialisation aka marshalling the servr will communicate with the client using the shared typeclass `Hangman` which its definition is shared with the JVM server and JS client.
+1. HTML5 File upload (Modified from [How to Use HTML5 File Drag and Drop](http://www.sitepoint.com/html5-file-drag-and-drop/))
+1. Server Push Chat. It supports both Websocket and Server-Sent Event
 
 This project uses project structure from [play-with-scalajs-example](https://github.com/vmunier/play-with-scalajs-example)
 ## Copyright notice
