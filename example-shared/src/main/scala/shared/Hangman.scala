@@ -2,11 +2,11 @@ package shared
 
 case class Hangman(level: Int,
                    word: String,
-                   guess: List[Char] = Nil,
-                   misses: Int = 0) {
+                   guess: List[Char] = Nil) {
 
-  lazy val guessWord =
-    word.toCharArray.map { c => if (guess.contains(c)) c else '_' }.mkString
+  val guessWord = word.map { c => if (guess.contains(c)) c else '_' }
+
+  lazy val misses = guess.length - guessWord.filter(_ != '_').distinct.length
 
   def reportStatus = {
     def persuasive(n: Int) = n match {

@@ -41,8 +41,7 @@ object HangmanController extends Controller {
 
   def guess(g: Char) = Action { implicit request =>
     readSession.map { hangman =>
-      val value = write(hangman.copy(`guess` = hangman.guess :+ g,
-        misses = if (hangman.word.contains(g)) hangman.misses else hangman.misses + 1))
+      val value = write(hangman.copy(guess = hangman.guess :+ g))
       Ok(value).withSession(writeSession(value))
     }.getOrElse(BadRequest)
   }
